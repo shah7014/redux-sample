@@ -1,10 +1,13 @@
 import React from "react";
+import PostsQuery from "../components/PostsQuery";
+import PostsList from "../components/PostsList";
 
 const PostsPage = () => {
   return (
-    <div>
-      <h1>POSTS</h1>
-    </div>
+    <>
+      <PostsQuery />
+      <PostsList />
+    </>
   );
 };
 

@@ -28,7 +28,7 @@ export const Container = styled.div`
 export const Button = styled.button`
   font-weight: bold;
   font-size: 1.1rem;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
   color: #fff;
   outline: none;
   border: none;
@@ -46,6 +46,26 @@ export const Button = styled.button`
 export const SectionTitle = styled.h2`
   font-size: 2rem;
   text-align: center;
+`;
+
+export const Input = styled.input`
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background: none;
+  outline: none;
+  border: 1px solid #000;
+  color: #000;
+  width: 100%;
+  /* border-radius: 0.25rem; */
+
+  &:focus {
+    background: #d1d1d1;
+  }
+`;
+
+export const InputError = styled.p`
+  font-size: 0.75rem;
+  color: red;
 `;
 
 export default GlobalStyle;

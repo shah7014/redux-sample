@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Button, SectionTitle } from "../globalStyles";
 import { deleteNoteAction } from "../redux/actions/notesActions";
 
 const NotestList = () => {
-  const notes = useSelector((storeData) => storeData.notes);
+  const notes = useSelector((storeData) => storeData.notes.notes);
 
   const dispatch = useDispatch();
 
   const deleteHandler = (id) => {
     dispatch(deleteNoteAction(id));
   };
+
+  // useEffect(() => {
+  //   console.log("I am running", notes);
+  // }, [notes]);
 
   return (
     <StyledNotestList>
