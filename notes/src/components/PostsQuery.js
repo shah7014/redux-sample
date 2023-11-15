@@ -4,7 +4,7 @@ import { Button, Container, Input, InputError } from "../globalStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import {
-  getPostsByIdAction,
+  getPostsAction,
   getUpdateQueryIdAction,
 } from "../redux/actions/postsActions";
 
@@ -24,7 +24,7 @@ const PostsQuery = () => {
   };
 
   const submitHandler = (e) => {
-    dispatch(getPostsByIdAction(queryId));
+    dispatch(getPostsAction(queryId));
   };
 
   return (
@@ -33,13 +33,11 @@ const PostsQuery = () => {
         <Form onSubmit={handleSubmit(submitHandler)}>
           <h3>Search Post By Id</h3>
           <Input
-            {...register("queryId", {
-              required: "Query id is a required field",
-            })}
+            {...register("queryId")}
             value={queryId}
             onChange={queryIdChangeHandler}
           />
-          {errors.queryId && <InputError>{errors.queryId.message}</InputError>}
+          {/* {errors.queryId && <InputError>{errors.queryId.message}</InputError>} */}
           <FormButton>Search</FormButton>
         </Form>
       </Container>

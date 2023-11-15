@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Container } from "../globalStyles";
-import { getAllPostsAction } from "../redux/actions/postsActions";
+import { getPostsAction } from "../redux/actions/postsActions";
 
 const PostsList = () => {
   const posts = useSelector((state) => state.posts.posts);
@@ -12,7 +12,7 @@ const PostsList = () => {
 
   useEffect(() => {
     console.log("inside effect");
-    dispatch(getAllPostsAction());
+    dispatch(getPostsAction());
   }, []);
 
   return (
@@ -20,7 +20,7 @@ const PostsList = () => {
       {isLoading && <h3>Loading...</h3>}
       {!isLoading && (
         <>
-          <h3>Total Posts{posts.length}</h3>
+          <h3>Total Posts :- {posts.length}</h3>
           {posts.map((post) => (
             <Card key={post.id}>
               <h4>{post.title}</h4>

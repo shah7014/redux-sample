@@ -12,28 +12,43 @@ export const getUpdateQueryIdAction = (id) => {
 };
 
 // THUNKS
-export const getPostsByIdAction = (id) => {
+export const getPostsAction = (id) => {
   return async (dispatch) => {
+    const queryId = id || "";
     try {
       dispatch(getPostLoadingAction());
-      const res = await axiosInstance.get(`/${id}`);
-      dispatch(getPostSuccessAction([res.data]));
+      const res = await axiosInstance.get(`/${queryId}`);
+      dispatch(
+        getPostSuccessAction(Array.isArray(res.data) ? res.data : [res.data])
+      );
     } catch (err) {
       dispatch(getPostFailureAction(err.message));
     }
   };
 };
-export const getAllPostsAction = () => {
-  return async (dispatch) => {
-    try {
-      dispatch(getPostLoadingAction());
-      const res = await axiosInstance.get("/");
-      dispatch(getPostSuccessAction(res.data));
-    } catch (err) {
-      dispatch(getPostFailureAction(err.message));
-    }
-  };
-};
+
+// export const getPostsByIdAction = (id) => {
+//   return async (dispatch) => {
+//     try {
+//       dispatch(getPostLoadingAction());
+//       const res = await axiosInstance.get(`/${id}`);
+//       dispatch(getPostSuccessAction([res.data]));
+//     } catch (err) {
+//       dispatch(getPostFailureAction(err.message));
+//     }
+//   };
+// };
+// export const getAllPostsAction = () => {
+//   return async (dispatch) => {
+//     try {
+//       dispatch(getPostLoadingAction());
+//       const res = await axiosInstance.get("/");
+//       dispatch(getPostSuccessAction(res.data));
+//     } catch (err) {
+//       dispatch(getPostFailureAction(err.message));
+//     }
+//   };
+// };
 
 export const getPostLoadingAction = (id) => {
   return { type: GET_POST_LOADING };
