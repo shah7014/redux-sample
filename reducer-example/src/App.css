@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 968px;
+  margin-inline: auto;
+  padding: 2rem;
+}
+
+h1 {
+  margin-bottom: 2rem;
+}
+
+.budget {
+  margin-bottom: 1rem;
+}
+
+.expenses {
+  h2 {
+    margin-bottom: 0.75rem;
+  }
+
+  ul {
+    list-style: none;
+    font-size: 1.2rem;
+
+    li {
+      padding: 1rem;
+      border: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      svg {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+}
