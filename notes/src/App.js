@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import NotesPage from "./pages/NotesPage";
 import PostsPage from "./pages/PostsPage";
 import Navbar from "./components/Navbar";
+import SamplePostsList from "./components/SamplePostsList";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<NotesPage />} />
+        {/* <Route path="/posts" element={<SamplePostsList />} /> */}
         <Route path="/posts" element={<PostsPage />} />
       </Routes>
     </>

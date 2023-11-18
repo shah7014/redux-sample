@@ -9,6 +9,7 @@ const store = createStore(
     notes: notesReducer,
     posts: postsReducer,
   }),
+  // composeWithDevTools()
   composeWithDevTools(applyMiddleware(thunk))
 );
 
