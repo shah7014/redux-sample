@@ -2,6 +2,7 @@ import React from "react";
 import GlobalStyle, { Container } from "./globalStyles";
 import AmountCards from "./components/AmountCards";
 import ExpensesList from "./components/ExpensesList";
+import NewExpense from "./components/NewExpense";
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
         <h1>Redux_Budget</h1>
         <AmountCards />
         <ExpensesList />
+        <NewExpense />
       </Container>
     </>
   );

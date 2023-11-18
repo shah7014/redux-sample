@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { Button, Card } from "../globalStyles";
+import { Button, Card, Input } from "../globalStyles";
 import { getRemoveExpenseAction } from "../redux/actions/expenseActions";
 
 const ExpensesList = () => {
   const expenses = useSelector((state) => state.expenses);
 
   const dispatch = useDispatch();
+
+  const [filterText, setFilterText] = useState("");
+
+  const filteredExpenses = useMemo(() => {
+    return expenses.filter((e) => e.name.includes(filterText));
+  }, [expenses, filterText]);
 
   const expenseRemoveHandler = (id) => {
     dispatch(getRemoveExpenseAction(id));
@@ -17,17 +23,29 @@ const ExpensesList = () => {
     <Section>
       <h2>Expenses</h2>
       <div>
-        {expenses.map((e) => (
-          <ExpenseCard key={e.id}>
-            <p>{e.name}</p>
-            <ExpenseActions>
-              <Amount>{e.amt}</Amount>
-              <RemoveButton onClick={() => expenseRemoveHandler(e.id)}>
-                Remove
-              </RemoveButton>
-            </ExpenseActions>
-          </ExpenseCard>
-        ))}
+        {expenses.length === 0 ? (
+          <p>Add an expense to show here</p>
+        ) : (
+          <>
+            <SearchExpenseInput
+              placeholder="Type to search..."
+              value={filterText}
+              onChange={(e) => setFilterText(e.target.value)}
+            />
+
+            {filteredExpenses.map((e) => (
+              <ExpenseCard key={e.id}>
+                <p>{e.name}</p>
+                <ExpenseActions>
+                  <Amount>{e.amt}</Amount>
+                  <RemoveButton onClick={() => expenseRemoveHandler(e.id)}>
+                    Remove
+                  </RemoveButton>
+                </ExpenseActions>
+              </ExpenseCard>
+            ))}
+          </>
+        )}
       </div>
     </Section>
   );
@@ -38,6 +56,12 @@ const Section = styled.section`
   display: flex;
   gap: 0.5rem;
   flex-direction: column;
+`;
+
+const SearchExpenseInput = styled(Input)`
+  padding: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
 `;
 
 const ExpenseCard = styled(Card)`

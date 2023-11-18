@@ -6,12 +6,7 @@ import {
 
 const expenseInitialState = {
   budget: 2000,
-  expenses: [
-    { id: 1, name: "Shopping", amt: 200 },
-    { id: 2, name: "Holiday", amt: 1000 },
-    { id: 3, name: "Taxi", amt: 150 },
-    { id: 4, name: "Education", amt: 2000 },
-  ],
+  expenses: [],
 };
 
 const expenseReducer = (state = expenseInitialState, action) => {
