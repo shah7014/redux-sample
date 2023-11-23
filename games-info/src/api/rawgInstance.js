@@ -41,3 +41,5 @@ export const getUpcomingGamesUrl = () =>
 
 export const getNewGamesUrl = () =>
   `games?page_size=10&dates=${getLastYearFormattedDate()},${getCurrentFormattedDate()}&ordering=-released`;
+
+export const getSelectedGameUrl = (id) => `games/${id}`;

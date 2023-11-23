@@ -1,43 +1,26 @@
-import {
-  FETCH_GAMES_LOADING,
-  FETCH_GAMES_ERROR,
-  FETCH_GAMES_SUCCESS,
-} from "../actions/gameActions";
+import { SET_GAMES, SET_SELECTED_GAME } from "../actions/gameActions";
 
 const initialState = {
-  populargames: [],
-  upcominggames: [],
-  newgames: [],
-  loading: false,
-  error: "",
+  popularGames: [],
+  upcomingGames: [],
+  newGames: [],
+  selectedGame: {},
 };
 
 const gameReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_GAMES_LOADING: {
+    case SET_GAMES: {
       return {
         ...state,
-        loading: true,
+        popularGames: action.payload.popularGames,
+        upcomingGames: action.payload.upcomingGames,
+        newGames: action.payload.newGames,
       };
     }
-    case FETCH_GAMES_ERROR: {
+    case SET_SELECTED_GAME: {
       return {
         ...state,
-        loading: false,
-        error: action.payload,
-        populargames: [],
-        upcominggames: [],
-        newgames: [],
-      };
-    }
-    case FETCH_GAMES_SUCCESS: {
-      return {
-        ...state,
-        loading: false,
-        error: "",
-        populargames: action.payload.popularGames,
-        upcominggames: action.payload.upcomingGames,
-        newgames: action.payload.newGames,
+        selectedGame: action.payload,
       };
     }
     default: {

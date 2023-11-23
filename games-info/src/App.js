@@ -1,11 +1,14 @@
 import React from "react";
 import Home from "./pages/Home";
+import { Container, GlobalStyle } from "./globalStyles";
 
 const App = () => {
   return (
     <>
-      <h1>Hell World</h1>
-      <Home />
+      <GlobalStyle />
+      <Container>
+        <Home />
+      </Container>
     </>
   );
 };
