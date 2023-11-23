@@ -4,8 +4,9 @@ import {
   getUpcomingGamesUrl,
   getNewGamesUrl,
   getSelectedGameUrl,
+  getSelectedGameScreenshotsUrl,
 } from "../../api/rawgInstance";
-import { setLoading, setError } from "./appActions";
+import { setLoading, setError, setShowModal } from "./appActions";
 
 export const SET_GAMES = "SET_GAMES";
 export const SET_SELECTED_GAME = "SET_SELECTED_GAME";
@@ -53,13 +54,19 @@ export const getGames = () => async (dispatch) => {
 const setLoadingAndGame = (isLoading, selectedGame) => (dispatch) => {
   dispatch(setLoading(isLoading));
   dispatch(setSelectedGame(selectedGame));
+  //  show the modal with the game
+  dispatch(setShowModal(true));
 };
 
 export const getGameById = (id) => async (dispatch) => {
   dispatch(setLoading(true));
   try {
     const res = await rawgInstance.get(getSelectedGameUrl(id));
-    dispatch(setLoadingAndGame(false, res.data));
+    const screenshotRes = await rawgInstance.get(
+      getSelectedGameScreenshotsUrl(id)
+    );
+    const selectedGame = { ...res.data, screenshots: screenshotRes.data };
+    dispatch(setLoadingAndGame(false, selectedGame));
   } catch (error) {
     dispatch(setError(error.message));
   }

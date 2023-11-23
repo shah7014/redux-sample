@@ -1,8 +1,9 @@
-import { SET_ERROR, SET_LOADING } from "../actions/appActions";
+import { SET_ERROR, SET_LOADING, SET_SHOW_MODAL } from "../actions/appActions";
 
 const initialState = {
   isLoading: false,
   error: "",
+  showModal: false,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -18,6 +19,12 @@ const appReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: action.payload,
+      };
+    }
+    case SET_SHOW_MODAL: {
+      return {
+        ...state,
+        showModal: action.payload,
       };
     }
     default: {

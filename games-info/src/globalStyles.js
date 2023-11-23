@@ -6,9 +6,30 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+
+  html {
+    /* firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #333 #fff;
+
+    /* chrome */
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #fff;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #333;
+    }
+  }
+
   body {
     font-family: 'Montserrat', sans-serif;
   }
+
   h2 {
     font-size: 3rem;
     font-family: 'Abril Fatface', cursive;
@@ -28,6 +49,10 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     color: #333
   };
+
+  img {
+    display: block;
+  }
 `;
 
 export const Container = styled.div`

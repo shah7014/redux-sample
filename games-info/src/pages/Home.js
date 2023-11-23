@@ -5,6 +5,7 @@ import { getGames } from "../redux/actions/gameActions";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Game from "../components/Game";
+import GameDetail from "../components/GameDetail";
 
 const Home = () => {
   const disaptch = useDispatch();
@@ -13,54 +14,63 @@ const Home = () => {
     (state) => state.games
   );
 
+  const { isLoading } = useSelector((state) => state.app);
+
   useEffectOnce(() => {
     disaptch(getGames());
   });
 
   return (
     <div>
-      <GamesList>
-        <h2>Popular Games</h2>
-        <Games>
-          {popularGames.map((g) => (
-            <Game
-              key={g.id}
-              id={g.id}
-              name={g.name}
-              releaseDate={g.released}
-              image={g["background_image"]}
-            />
-          ))}
-        </Games>
-      </GamesList>
-      <GamesList>
-        <h2>Upcoming Games</h2>
-        <Games>
-          {upcomingGames.map((g) => (
-            <Game
-              key={g.id}
-              id={g.id}
-              name={g.name}
-              releaseDate={g.released}
-              image={g["background_image"]}
-            />
-          ))}
-        </Games>
-      </GamesList>
-      <GamesList>
-        <h2>New Games</h2>
-        <Games>
-          {newGames.map((g) => (
-            <Game
-              key={g.id}
-              id={g.id}
-              name={g.name}
-              releaseDate={g.released}
-              image={g["background_image"]}
-            />
-          ))}
-        </Games>
-      </GamesList>
+      {isLoading ? (
+        <p>Loading</p>
+      ) : (
+        <>
+          <GameDetail />
+          <GamesList>
+            <h2>Popular Games</h2>
+            <Games>
+              {popularGames.map((g) => (
+                <Game
+                  key={g.id}
+                  id={g.id}
+                  name={g.name}
+                  releaseDate={g.released}
+                  image={g["background_image"]}
+                />
+              ))}
+            </Games>
+          </GamesList>
+          <GamesList>
+            <h2>Upcoming Games</h2>
+            <Games>
+              {upcomingGames.map((g) => (
+                <Game
+                  key={g.id}
+                  id={g.id}
+                  name={g.name}
+                  releaseDate={g.released}
+                  image={g["background_image"]}
+                />
+              ))}
+            </Games>
+          </GamesList>
+          <GamesList>
+            <h2>New Games</h2>
+            <Games>
+              {newGames.map((g) => (
+                <Game
+                  key={g.id}
+                  id={g.id}
+                  name={g.name}
+                  releaseDate={g.released}
+                  image={g["background_image"]}
+                />
+              ))}
+            </Games>
+          </GamesList>
+        </>
+      )}
     </div>
   );
 };

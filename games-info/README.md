@@ -7,3 +7,53 @@
 - create some genres page
 
 - using moment package for dates
+
+### creating a modal
+
+- In plane HTML creating a modal using `HTMLDialogElement`. It provides us a `<dialog></dialog>` tag
+
+```
+  <button id="open-btn">Open Dialog</button>
+
+  <dialog id="modal">
+    <p>This is testing out HTML dialog element</p>
+    <button id="close-btn">Close Dialog</button>
+  </dialog>
+
+  <!-- In js -->
+  const dialog = document.querySelector("#modal");
+  const openBtn = document.querySelector("#open-btn");
+  const closeBtn = document.querySelector("#close-btn");
+
+  openBtn.addEventListener("click", () => {
+    dialog.showModal()
+  })
+
+  closeBtn.addEventListener("click", () => {
+    dialog.close()
+  })
+
+```
+
+### styling scrollbar
+
+```
+  /* firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #333 #fff;
+
+  /* chrome */
+  html {
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #fff;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #333;
+    }
+  }
+```

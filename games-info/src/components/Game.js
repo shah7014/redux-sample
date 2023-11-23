@@ -17,6 +17,9 @@ const Game = ({ id, name, releaseDate, image }) => {
   const gameSelectHandler = () => {
     console.log("ID:- ", id);
     dispatch(getGameById(id));
+
+    // remove main body scrollbar by changing overflow to hidden
+    document.body.style.overflow = "hidden";
   };
 
   return (
@@ -33,6 +36,7 @@ const StyledGame = styled(motion.div)`
   border-radius: 1rem;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  overflow: hidden;
 
   img {
     width: 100%;
