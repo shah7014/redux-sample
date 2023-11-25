@@ -45,3 +45,5 @@ export const getNewGamesUrl = () =>
 export const getSelectedGameUrl = (id) => `games/${id}`;
 
 export const getSelectedGameScreenshotsUrl = (id) => `games/${id}/screenshots`;
+
+export const getFilterdGameUrl = (searchText) => `games?search=${searchText}`;

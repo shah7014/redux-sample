@@ -1,10 +1,16 @@
-import { SET_GAMES, SET_SELECTED_GAME } from "../actions/gameActions";
+import {
+  REMOVE_FILTERED_GAMES,
+  SET_FILTERED_GAMES,
+  SET_GAMES,
+  SET_SELECTED_GAME,
+} from "../actions/gameActions";
 
 const initialState = {
   popularGames: [],
   upcomingGames: [],
   newGames: [],
   selectedGame: {},
+  filteredgames: [],
 };
 
 const gameReducer = (state = initialState, action) => {
@@ -21,6 +27,18 @@ const gameReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedGame: action.payload,
+      };
+    }
+    case SET_FILTERED_GAMES: {
+      return {
+        ...state,
+        filteredgames: action.payload,
+      };
+    }
+    case REMOVE_FILTERED_GAMES: {
+      return {
+        ...state,
+        filteredgames: [],
       };
     }
     default: {

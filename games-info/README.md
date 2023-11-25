@@ -8,6 +8,16 @@
 
 - using moment package for dates
 
+### portal
+
+- we can load this text in a div with id `overlays` whereas our whole app will be loaded in div with id `root`
+
+```
+  import {createPortal} from "react-dom"
+
+  createPortal(<p>Hello there</p>, document.getElementById("overlays"))
+```
+
 ### creating a modal
 
 - In plane HTML creating a modal using `HTMLDialogElement`. It provides us a `<dialog></dialog>` tag

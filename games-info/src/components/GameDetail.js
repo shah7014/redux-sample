@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setShowModal } from "../redux/actions/appActions";
 import Modal from "./Modal";
+import applePlatform from "../img/apple.svg";
+import gamepadPlatform from "../img/gamepad.svg";
+import nintendoPlatform from "../img/nintendo.svg";
+import playstationPlatform from "../img/playstation.svg";
+import steamPlatform from "../img/steam.svg";
+import xboxPlatform from "../img/xbox.svg";
+import fullStar from "../img/star-full.png";
+import emptyStar from "../img/star-empty.png";
+
+const platformImages = [
+  { identifier: "mac", image: applePlatform },
+  { identifier: "gamepad", image: gamepadPlatform },
+  { identifier: "nintendo", image: nintendoPlatform },
+  { identifier: "playstation", image: playstationPlatform },
+  { identifier: "pc", image: steamPlatform },
+  { identifier: "xbox", image: xboxPlatform },
+];
 
 const GameDetail = () => {
   const dispatch = useDispatch();
@@ -16,7 +33,45 @@ const GameDetail = () => {
 
     // show back the main body scrollbar by changing overflow to auto
     document.body.style.overflow = "auto";
+    // going back to selecte game after closing of modal
+    const targetElement = document.getElementById(`game-${selectedGame.name}`);
+    targetElement.scrollIntoView({ behavior: "instant" });
   };
+
+  const getPlatformImage = useCallback((platformName) => {
+    return (
+      platformImages.find((p) =>
+        platformName.toLowerCase().includes(p.identifier)
+      )?.image || gamepadPlatform
+    );
+  }, []);
+
+  const getAsRatingStars = useCallback((rating) => {
+    // if (rating) {
+    const noOfFullStars = Math.floor(+rating);
+    const noOfEmptyStars = 5 - noOfFullStars;
+    console.log("Full:- ", noOfFullStars);
+    console.log("Empty:- ", noOfEmptyStars);
+    return (
+      <>
+        {Array(noOfFullStars)
+          .fill(0)
+          .map((_) => (
+            <img src={fullStar} />
+          ))}
+        {Array(noOfEmptyStars)
+          .fill(0)
+          .map((_) => (
+            <img src={emptyStar} />
+          ))}
+      </>
+    );
+    // }
+  }, []);
+
+  if (!Object.keys(selectedGame).length) {
+    return <></>;
+  }
 
   return (
     <Modal showModal={showModal} onClose={closeModal}>
@@ -24,12 +79,20 @@ const GameDetail = () => {
         <div>
           <h3>{selectedGame?.name}</h3>
           <p>Rating: {selectedGame?.rating}</p>
+          <RatingStars>{getAsRatingStars(selectedGame?.rating)}</RatingStars>
         </div>
         <div>
           <h3>Platforms</h3>
-          {selectedGame?.platforms?.map(({ platform }) => (
-            <p key={platform.id}>{platform.name}</p>
-          ))}
+          <Platforms>
+            {selectedGame?.platforms?.map(({ platform }) => (
+              <div key={platform.id}>
+                <img
+                  src={getPlatformImage(platform.name)}
+                  alt={platform.name}
+                />
+              </div>
+            ))}
+          </Platforms>
         </div>
       </GameBaseInfo>
       <GameImage>
@@ -54,9 +117,30 @@ const GameBaseInfo = styled.div`
     padding-left: 0;
   }
 
-  div {
+  & > div {
     display: flex;
     flex-direction: column;
+  }
+`;
+
+const RatingStars = styled.div`
+  display: flex;
+  gap: 0.2rem;
+
+  img {
+    width: 2rem;
+    height: 2rem;
+  }
+`;
+
+const Platforms = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+
+  img {
+    width: 100%;
   }
 `;
 

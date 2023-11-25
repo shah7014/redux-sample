@@ -10,8 +10,6 @@ const Game = ({ id, name, releaseDate, image }) => {
   //   console.log(allGames.find((g) => g.id === id));
   // };
 
-  const { selectedgame } = useSelector((state) => state.games);
-
   const dispatch = useDispatch();
 
   const gameSelectHandler = () => {
@@ -23,7 +21,7 @@ const Game = ({ id, name, releaseDate, image }) => {
   };
 
   return (
-    <StyledGame onClick={gameSelectHandler}>
+    <StyledGame onClick={gameSelectHandler} id={`game-${name}`}>
       <h3>{name}</h3>
       <p>{releaseDate}</p>
       <img src={image} alt={name} />

@@ -5,11 +5,14 @@ import {
   getNewGamesUrl,
   getSelectedGameUrl,
   getSelectedGameScreenshotsUrl,
+  getFilterdGameUrl,
 } from "../../api/rawgInstance";
 import { setLoading, setError, setShowModal } from "./appActions";
 
 export const SET_GAMES = "SET_GAMES";
 export const SET_SELECTED_GAME = "SET_SELECTED_GAME";
+export const SET_FILTERED_GAMES = "SET_FILTERED_GAMES";
+export const REMOVE_FILTERED_GAMES = "REMOVE_FILTERED_GAMES";
 
 export const setGames = ({ popularGames, newGames, upcomingGames }) => {
   return {
@@ -22,6 +25,19 @@ export const setSelectedGame = (game) => {
   return {
     type: SET_SELECTED_GAME,
     payload: game,
+  };
+};
+
+export const setFilteredGames = (games) => {
+  return {
+    type: SET_FILTERED_GAMES,
+    payload: games,
+  };
+};
+
+export const removeFilteredGames = () => {
+  return {
+    type: REMOVE_FILTERED_GAMES,
   };
 };
 
@@ -69,5 +85,18 @@ export const getGameById = (id) => async (dispatch) => {
     dispatch(setLoadingAndGame(false, selectedGame));
   } catch (error) {
     dispatch(setError(error.message));
+  }
+};
+
+export const getFilteredGames = (searchText) => async (dispatch) => {
+  dispatch(setLoading(true));
+  try {
+    const response = await rawgInstance.get(getFilterdGameUrl(searchText));
+    const games = response.data.results;
+    dispatch(setFilteredGames(games));
+  } catch (error) {
+    dispatch(setError(error.message));
+  } finally {
+    dispatch(setLoading(false));
   }
 };

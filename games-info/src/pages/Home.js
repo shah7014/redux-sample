@@ -6,11 +6,12 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import Game from "../components/Game";
 import GameDetail from "../components/GameDetail";
+import SearchGame from "../components/SearchGame";
 
 const Home = () => {
   const disaptch = useDispatch();
 
-  const { popularGames, upcomingGames, newGames } = useSelector(
+  const { popularGames, upcomingGames, newGames, filteredgames } = useSelector(
     (state) => state.games
   );
 
@@ -22,53 +23,73 @@ const Home = () => {
 
   return (
     <div>
+      <SearchGame />
       {isLoading ? (
         <p>Loading</p>
       ) : (
         <>
           <GameDetail />
-          <GamesList>
-            <h2>Popular Games</h2>
-            <Games>
-              {popularGames.map((g) => (
-                <Game
-                  key={g.id}
-                  id={g.id}
-                  name={g.name}
-                  releaseDate={g.released}
-                  image={g["background_image"]}
-                />
-              ))}
-            </Games>
-          </GamesList>
-          <GamesList>
-            <h2>Upcoming Games</h2>
-            <Games>
-              {upcomingGames.map((g) => (
-                <Game
-                  key={g.id}
-                  id={g.id}
-                  name={g.name}
-                  releaseDate={g.released}
-                  image={g["background_image"]}
-                />
-              ))}
-            </Games>
-          </GamesList>
-          <GamesList>
-            <h2>New Games</h2>
-            <Games>
-              {newGames.map((g) => (
-                <Game
-                  key={g.id}
-                  id={g.id}
-                  name={g.name}
-                  releaseDate={g.released}
-                  image={g["background_image"]}
-                />
-              ))}
-            </Games>
-          </GamesList>
+          {filteredgames.length !== 0 ? (
+            <GamesList>
+              <h2>Searched Games</h2>
+              <Games>
+                {filteredgames.map((g) => (
+                  <Game
+                    key={g.id}
+                    id={g.id}
+                    name={g.name}
+                    releaseDate={g.released}
+                    image={g["background_image"]}
+                  />
+                ))}
+              </Games>
+            </GamesList>
+          ) : (
+            <>
+              <GamesList>
+                <h2>Popular Games</h2>
+                <Games>
+                  {popularGames.map((g) => (
+                    <Game
+                      key={g.id}
+                      id={g.id}
+                      name={g.name}
+                      releaseDate={g.released}
+                      image={g["background_image"]}
+                    />
+                  ))}
+                </Games>
+              </GamesList>
+              <GamesList>
+                <h2>Upcoming Games</h2>
+                <Games>
+                  {upcomingGames.map((g) => (
+                    <Game
+                      key={g.id}
+                      id={g.id}
+                      name={g.name}
+                      releaseDate={g.released}
+                      image={g["background_image"]}
+                    />
+                  ))}
+                </Games>
+              </GamesList>
+              <GamesList>
+                <h2>New Games</h2>
+                <Games>
+                  {newGames.map((g) => (
+                    <Game
+                      key={g.id}
+                      id={g.id}
+                      name={g.name}
+                      releaseDate={g.released}
+                      image={g["background_image"]}
+                    />
+                  ))}
+                </Games>
+              </GamesList>
+            </>
+          )}
         </>
       )}
     </div>

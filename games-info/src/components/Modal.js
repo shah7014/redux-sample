@@ -2,19 +2,16 @@ import React from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 
-const Modal = (props) => {
-  const clickHandler = () => {
-    props.onClose();
-  };
-
-  if (!props.showModal) {
+const Modal = ({ showModal, onClose, children }) => {
+  if (!showModal) {
     return null;
   }
 
+  // using portal for modals
   return createPortal(
     <>
-      <ModalOverlay onClick={clickHandler}></ModalOverlay>
-      <ModalContainer>{props.children}</ModalContainer>
+      <ModalOverlay onClick={onClose}></ModalOverlay>
+      <ModalContainer>{children}</ModalContainer>
     </>,
     document.getElementById("overlays")
   );
