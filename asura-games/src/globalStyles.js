@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 14px;
     line-height: 1.5;
     color: #b8b8b8;
+    font-family: 'Poppins', sans-serif;
   }
 
   h3 {
