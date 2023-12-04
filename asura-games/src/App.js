@@ -32,7 +32,7 @@ const ContentGrid = styled.div`
   padding-bottom: 2.5rem;
 
   display: grid;
-  grid-template-columns: 7fr 3fr;
+  grid-template-columns: 6fr 4fr;
   column-gap: 1rem;
 
   @media screen and (max-width: 768px) {

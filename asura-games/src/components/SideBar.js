@@ -6,6 +6,7 @@ import {
   setPopularityPeriod,
 } from "../redux/actions/gameActions";
 import { Link } from "react-router-dom";
+import UseEffectOnce from "../hooks/useEffectOnce";
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -14,9 +15,9 @@ const SideBar = () => {
     (state) => state.games
   );
 
-  useEffect(() => {
+  UseEffectOnce(() => {
     dispatch(getGamesForTimePeriod("weekly"));
-  }, [dispatch]);
+  });
 
   const timePeriodChnageHandler = (newTimePeriod) => {
     dispatch(getGamesForTimePeriod(newTimePeriod));
@@ -75,6 +76,8 @@ const SideBar = () => {
 const StyledSideBar = styled.div`
   background: #222;
   padding-bottom: 0.5rem;
+  /* to make sure its not starteched in height as the content grid column (or left side column) */
+  align-self: start;
 `;
 
 const SideBarTitle = styled.div`
