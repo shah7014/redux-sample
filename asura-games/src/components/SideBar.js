@@ -15,12 +15,10 @@ const SideBar = () => {
   );
 
   useEffect(() => {
-    dispatch(setPopularityPeriod("weekly"));
     dispatch(getGamesForTimePeriod("weekly"));
   }, [dispatch]);
 
   const timePeriodChnageHandler = (newTimePeriod) => {
-    dispatch(setPopularityPeriod(newTimePeriod));
     dispatch(getGamesForTimePeriod(newTimePeriod));
   };
 
@@ -51,7 +49,7 @@ const SideBar = () => {
             <Card>
               <CardNumber>{index + 1}</CardNumber>
               <CardImage>
-                <img src={game["background_image"]} alt={game.name} />
+                <img src={game["background_image"]} alt={"game"} />
               </CardImage>
               <CardContent>
                 <Link to={`/games/${game.name}`}>

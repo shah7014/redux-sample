@@ -1,45 +1,18 @@
-const getFormattedDoubleDigitvalue = (a) => {
-  return a < 10 ? `0${a}` : a;
-};
-const getDate = () => {
-  return new Date().getDate();
-};
+import moment from "moment";
 
-const getMonth = () => {
-  return new Date().getMonth() + 1;
-};
+const getCurrentDate = () => moment().format("YYYY-MM-DD");
 
-const getYear = () => {
-  return new Date().getFullYear();
-};
+const getLastWeekDate = () => moment().subtract(7, "days").format("YYYY-MM-DD");
 
-const getTodayFormattedDate = () => {
-  return `${getYear()}-${getFormattedDoubleDigitvalue(
-    getMonth()
-  )}-${getFormattedDoubleDigitvalue(getDate())}`;
-};
+const getLastMonthlyDate = () =>
+  moment().subtract(1, "month").format("YYYY-MM-DD");
 
-const getPastWeekFormattedDate = () => {
-  return `${getYear()}-${getFormattedDoubleDigitvalue(
-    getMonth()
-  )}-${getFormattedDoubleDigitvalue(getDate() - 7)}`;
-};
-
-const getPastMonthFormattedDate = () => {
-  return `${getYear()}-${getFormattedDoubleDigitvalue(
-    getMonth() - 1
-  )}-${getFormattedDoubleDigitvalue(getDate())}`;
-};
-
-const getVeryOldFormattedDate = () => {
-  return `${getYear() - 50}-${getFormattedDoubleDigitvalue(
-    getMonth()
-  )}-${getFormattedDoubleDigitvalue(getDate())}`;
-};
+const getVeryOldDate = () =>
+  moment().subtract(50, "years").format("YYYY-MM-DD");
 
 export const getWeeklyPopularGamesUrl = () =>
-  `/games?page_size=10&ordering=-rating&dates=${getPastWeekFormattedDate()},${getTodayFormattedDate()}`;
+  `/games?page_size=10&ordering=-rating&dates=${getLastWeekDate()},${getCurrentDate()}`;
 export const getMonthlyyPopularGamesUrl = () =>
-  `/games?page_size=10&ordering=-rating&dates=${getPastMonthFormattedDate()},${getTodayFormattedDate()}`;
+  `/games?page_size=10&ordering=-rating&dates=${getLastMonthlyDate()},${getCurrentDate()}`;
 export const getAllTimePopularGamesUrl = () =>
-  `/games?page_size=10&ordering=-rating&dates=${getVeryOldFormattedDate()},${getTodayFormattedDate()}`;
+  `/games?page_size=10&ordering=-rating&dates=${getVeryOldDate()},${getCurrentDate()}`;

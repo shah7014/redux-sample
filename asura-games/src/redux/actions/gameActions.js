@@ -23,6 +23,7 @@ export const setPopularGames = (games) => {
 };
 
 export const getGamesForTimePeriod = (timePeriod) => async (dispatch) => {
+  dispatch(setPopularityPeriod(timePeriod));
   let apiUrl;
   if (timePeriod === "weekly") {
     apiUrl = getWeeklyPopularGamesUrl();
