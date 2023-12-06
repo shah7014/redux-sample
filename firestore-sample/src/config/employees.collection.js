@@ -1,4 +1,13 @@
-import { collection, doc, getDocs, writeBatch } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  writeBatch,
+  runTransaction,
+  query,
+  where,
+  updateDoc,
+} from "firebase/firestore";
 import firestore from "./firebase";
 import { employeesData } from "../mocks/data";
 
@@ -25,4 +34,51 @@ export const initializeEmployeesCollection = () => {
   batch.commit().then(() => console.log("DONE"));
 };
 
-export const chnageSalaryTypeOfAllRecords = () => {};
+const getDocumentFromFirstName = async (firstName) => {
+  const q = query(employeesCollection, where("firstName", "==", firstName));
+  const querySnapshot = await getDocs(q);
+  const docId = querySnapshot.docs.map((snapshot) => ({
+    id: snapshot.id,
+    ...snapshot.data(),
+  }))[0];
+  return docId;
+};
+
+export const changeSalaryTypeOfAllRecords = async () => {
+  const firstNames = employeesData.map((e) => e.firstName);
+
+  for (let firstName of firstNames) {
+    try {
+      const document = await getDocumentFromFirstName(firstName);
+      const documnetRef = doc(employeesCollection, document.id);
+      await updateDoc(documnetRef, { salary: +document.salary / 10 });
+      console.log("Update done");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  // firstNames.forEach((firstName) => {
+  //   runTransaction(firestore, async (transaction) => {
+  //     const q = query(employeesCollection, where("firstName", "==", firstName));
+
+  //     const querySnapshot = await getDocs(q);
+
+  //     let docId;
+  //     querySnapshot.forEach((doc) => {
+  //       docId = doc.id;
+  //     });
+
+  //     const docRef = doc(employeesCollection, docId);
+
+  //     const fullDocContent = await transaction.get(docRef);
+
+  //     transaction.update(docRef, {
+  //       ...fullDocContent.data(),
+  //       salary: +fullDocContent.data().salary,
+  //     });
+  //   }).catch((err) => {
+  //     console.log(err.message);
+  //   });
+  // });
+};

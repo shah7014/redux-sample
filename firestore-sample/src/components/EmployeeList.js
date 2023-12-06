@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchEmployees } from "../redux/employee/empoyeeActions";
+import { changeSalaryTypeOfAllRecords } from "../config/employees.collection";
 
 const EmployeeList = () => {
   const { employees } = useSelector((state) => state.employee);
@@ -22,7 +23,6 @@ const EmployeeList = () => {
       <table>
         <thead>
           <tr>
-            <th>Id</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
@@ -34,7 +34,6 @@ const EmployeeList = () => {
         <tbody>
           {employees?.map((e) => (
             <tr key={e.id}>
-              <td>{e.id}</td>
               <td>{e.firstName}</td>
               <td>{e.lastName}</td>
               <td>{e.email}</td>
