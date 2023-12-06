@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+h1 {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+
+  padding: 2rem 1rem;
+
+  @media screen and (max-width: 768px) {
+    padding: 1rem 0.5rem;
+  }
+}
+
+button {
+  border: 1px solid #0366ee;
+  border-radius: 4px;
+  background: #0366ee;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+}
+
+.employees {
+  margin: 2rem 0;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    tbody tr:nth-of-type(odd) {
+      background: #f8f8f8;
+    }
+
+    th {
+      border-bottom: 2px solid #dedede;
+
+      &:last-child {
+        text-align: center;
+      }
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 0.5rem;
+    }
+
+    .right-align {
+      text-align: right;
+    }
+
+    button {
+      background: transparent;
+      border: 1px solid #cdcdcd;
+      color: #4e4e4e;
+      border-radius: 4px;
+      font-size: 1rem;
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+    }
+  }
+
+  &__add {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1rem 0 2rem;
+
+    @media screen and (max-width: 768px) {
+      justify-content: center;
+    }
+  }
+}
+
+.add-edit-employee {
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 5px;
+      outline: none;
+      border: 1px solid #ccc;
+      font-family: "Poppins", sans-serif;
+
+      &:focus {
+        border: 1px solid #aaa;
+      }
+    }
+
+    .form-error {
+      font-size: 0.75rem;
+      color: #ff0000;
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    button:last-child {
+      background: transparent;
+      border: 1px solid #cdcdcd;
+      color: #4e4e4e;
+    }
+  }
+}
