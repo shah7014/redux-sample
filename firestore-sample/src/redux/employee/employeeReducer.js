@@ -1,7 +1,8 @@
-import { SET_EMPLOYEES } from "./empoyeeActions";
+import { SET_EMPLOYEES, SET_SELECTED_EMPLOYEE } from "./empoyeeActions";
 
 const initialState = {
   employees: [],
+  selectedEmployee: {},
 };
 
 const employeeReducer = (state = initialState, action) => {
@@ -10,6 +11,12 @@ const employeeReducer = (state = initialState, action) => {
       return {
         ...state,
         employees: action.payload,
+      };
+    }
+    case SET_SELECTED_EMPLOYEE: {
+      return {
+        ...state,
+        selectedEmployee: action.payload,
       };
     }
     default: {

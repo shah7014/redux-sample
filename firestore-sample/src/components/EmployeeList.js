@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchEmployees } from "../redux/employee/empoyeeActions";
-import { changeSalaryTypeOfAllRecords } from "../config/employees.collection";
+import {
+  deleteSelectedEmployee,
+  fetchEmployees,
+} from "../redux/employee/empoyeeActions";
 
 const EmployeeList = () => {
   const { employees } = useSelector((state) => state.employee);
@@ -40,10 +42,12 @@ const EmployeeList = () => {
               <td>{e.salary}</td>
               <td>{e.date}</td>
               <td className="right-align">
-                <button>Edit</button>
+                <button onClick={() => navigate(`/edit/${e.id}`)}>Edit</button>
               </td>
               <td>
-                <button>Delete</button>
+                <button onClick={() => dispatch(deleteSelectedEmployee(e.id))}>
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

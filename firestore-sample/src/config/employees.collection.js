@@ -7,6 +7,9 @@ import {
   query,
   where,
   updateDoc,
+  addDoc,
+  getDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import firestore from "./firebase";
 import { employeesData } from "../mocks/data";
@@ -15,6 +18,25 @@ export const employeesCollection = collection(firestore, "employees");
 
 export const getAllEmployees = () => {
   return getDocs(employeesCollection);
+};
+
+export const createEmployee = (newEmployee) => {
+  return addDoc(employeesCollection, newEmployee);
+};
+
+export const getEmployee = (id) => {
+  const docRef = doc(employeesCollection, id);
+  return getDoc(docRef);
+};
+
+export const updateEmployee = (id, data) => {
+  const docRef = doc(employeesCollection, id);
+  return updateDoc(docRef, data);
+};
+
+export const deleteEmployee = (id) => {
+  const docRef = doc(employeesCollection, id);
+  return deleteDoc(docRef);
 };
 
 // batch write to initialize the employees collection

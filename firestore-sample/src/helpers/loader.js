@@ -6,9 +6,12 @@ export const startLoading = () => {
     willOpen: () => {
       Swal.showLoading();
     },
+    willClose: () => {
+      Swal.hideLoading();
+    },
   });
 };
 
 export const hideLoading = () => {
-  Swal.hideLoading();
+  Swal.close();
 };

@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   getEmailFieldValidation,
   getRequiredFieldValidation,
 } from "../helpers/formValidations";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addEmployee,
+  fetchEmployee,
+  updateSelectedEmployee,
+} from "../redux/employee/empoyeeActions";
+import { useNavigate, useParams } from "react-router-dom";
+import { updateEmployee } from "../config/employees.collection";
 
 const AddEditEmployee = () => {
+  const { selectedEmployee } = useSelector((state) => state.employee);
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
+    setValue,
   } = useForm({
     defaultValues: {
       firstName: "",
@@ -20,20 +31,62 @@ const AddEditEmployee = () => {
     },
   });
 
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const { id: employeeId } = useParams();
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      navigate("/");
+    }
+  }, [isSubmitSuccessful]);
+
+  useEffect(() => {
+    if (employeeId) {
+      dispatch(fetchEmployee(employeeId));
+    }
+  }, [employeeId]);
+
+  useEffect(() => {
+    const setValueForField = (field, value) => {
+      setValue(field, value, {
+        shouldValidate: true,
+      });
+    };
+
+    if (Object.keys(selectedEmployee)?.length > 0) {
+      setValueForField("firstName", selectedEmployee.firstName);
+      setValueForField("lastName", selectedEmployee.lastName);
+      setValueForField("email", selectedEmployee.email);
+      setValueForField("salary", selectedEmployee.salary);
+    }
+  }, [selectedEmployee]);
+
   const submitSuccessHandler = (data) => {
-    console.log(data);
-  };
-  const submitFailureHandler = (errors) => {
-    console.log(errors);
+    const getZeroPreponded = (d) => (d < 10 ? `0${d}` : d);
+
+    const newEmployee = {
+      ...data,
+      date: `${data.date.getFullYear()}-${getZeroPreponded(
+        data.date.getMonth() + 1
+      )}-${getZeroPreponded(data.date.getDate())}`,
+    };
+
+    console.log(newEmployee);
+
+    if (employeeId) {
+      dispatch(updateSelectedEmployee(employeeId, newEmployee));
+      return;
+    }
+    dispatch(addEmployee(newEmployee));
   };
 
   return (
     <div className="add-edit-employee">
       <h2>Add Employee</h2>
-      <form
-        noValidate
-        onSubmit={handleSubmit(submitSuccessHandler, submitFailureHandler)}
-      >
+      <form noValidate onSubmit={handleSubmit(submitSuccessHandler)}>
         <div className="form-control">
           <label htmlFor="firstName">First Name</label>
           <input
@@ -96,8 +149,8 @@ const AddEditEmployee = () => {
           {errors.date && <p className="form-error">{errors.date.message}</p>}
         </div>
         <div className="form-actions">
-          <button type="submit">Add</button>
-          <button>Cancel</button>
+          <button type="submit">{employeeId ? "Edit" : "Add"}</button>
+          <button onClick={() => navigate("/")}>Cancel</button>
         </div>
       </form>
     </div>
