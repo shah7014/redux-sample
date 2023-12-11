@@ -8,15 +8,8 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Typography,
-  styled,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-
-export const StyledLink = styled(Link)(({ theme }) => ({
-  color: theme.palette.text.primary,
-  textDecoration: "none",
-}));
+import { StyledLink } from "./common";
 
 export const MenuItemList = () => (
   <List>
@@ -42,11 +35,3 @@ export const MenuItemList = () => (
     </ListItem>
   </List>
 );
-
-export const PageHeader = ({ title }) => {
-  return (
-    <Typography variant="h4" sx={{ textAlign: "center", marginBottom: "16px" }}>
-      {title}
-    </Typography>
-  );
-};

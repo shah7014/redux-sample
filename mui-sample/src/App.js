@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import NavBar from "./components/NavBar";
-import { Route, Routes } from "react-router-dom";
 import { Box, CssBaseline, Divider, Drawer, Toolbar } from "@mui/material";
-import { MenuItemList } from "./components/global";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import NavBar from "./components/NavBar";
 import Todos from "./components/Todo";
+import { MenuItemList } from "./components/global/MenuItemList";
+import Notification from "./components/global/Notification";
 
 const App = () => {
   const drawerWidth = 240;
@@ -11,6 +12,7 @@ const App = () => {
   return (
     <>
       <CssBaseline />
+      <Notification />
       <NavBar />
       <Box sx={{ display: "flex" }}>
         <Box
@@ -36,7 +38,7 @@ const App = () => {
           sx={{
             width: { xs: "100%", sm: `calc(100% - ${drawerWidth}px)` },
             padding: "8px",
-            height: "100vh",
+            height: "100%",
             backgroundColor: (theme) => theme.palette.grey[100],
           }}
         >

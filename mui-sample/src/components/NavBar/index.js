@@ -10,7 +10,7 @@ import {
   styled,
 } from "@mui/material";
 import React from "react";
-import { MenuItemList } from "../global";
+import { MenuItemList } from "../global/MenuItemList";
 import DarkModeSwitch from "./DarkModeSwitch";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMobileDrawer } from "../../redux/app/appActions";
