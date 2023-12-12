@@ -13,7 +13,7 @@ import React from "react";
 import { MenuItemList } from "../global/MenuItemList";
 import DarkModeSwitch from "./DarkModeSwitch";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMobileDrawer } from "../../redux/app/appActions";
+import { setTheme, toggleMobileDrawer } from "../../redux/app/appActions";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
@@ -24,7 +24,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 const NavBar = () => {
   const drawerWidth = 240;
 
-  const { isMobileDrawerOpen } = useSelector((state) => state.app);
+  const { isMobileDrawerOpen, theme } = useSelector((state) => state.app);
 
   const dispatch = useDispatch();
 
@@ -36,6 +36,14 @@ const NavBar = () => {
       return;
     }
     dispatch(toggleMobileDrawer(open));
+  };
+
+  const themeChangeHandler = (e) => {
+    if (e.target.checked) {
+      dispatch(setTheme("dark"));
+    } else {
+      dispatch(setTheme("light"));
+    }
   };
 
   return (
@@ -58,7 +66,10 @@ const NavBar = () => {
             <FactoryIcon />
             <Typography variant="h5">Mui Sample</Typography>
           </Stack>
-          <DarkModeSwitch />
+          <DarkModeSwitch
+            checked={theme === "dark"}
+            onChange={themeChangeHandler}
+          />
         </StyledToolbar>
       </AppBar>
 

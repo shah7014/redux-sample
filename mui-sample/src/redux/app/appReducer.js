@@ -2,6 +2,7 @@ import {
   SET_ERROR,
   SET_IS_LOADING,
   SET_SUCCESS,
+  SET_THEME,
   TOGGLE_MOBILE_DRAWER,
 } from "./appActions";
 
@@ -10,6 +11,7 @@ const initialState = {
   error: { open: false, message: "" },
   success: { open: false, message: "" },
   isLoading: false,
+  theme: "light",
 };
 
 const appReducer = (state = initialState, action) => {
@@ -36,6 +38,12 @@ const appReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: action.payload,
+      };
+    }
+    case SET_THEME: {
+      return {
+        ...state,
+        theme: action.payload,
       };
     }
     default: {

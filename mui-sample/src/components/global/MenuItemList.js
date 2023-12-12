@@ -1,6 +1,7 @@
 import {
   ListAltOutlined as ListAltOutlinedIcon,
   People as PeopleIcon,
+  School as SchoolIcon,
 } from "@mui/icons-material";
 import {
   List,
@@ -24,12 +25,22 @@ export const MenuItemList = () => (
       </StyledLink>
     </ListItem>
     <ListItem>
-      <StyledLink to="/">
+      <StyledLink to="/employees">
         <ListItemButton>
           <ListItemIcon>
             <PeopleIcon />
           </ListItemIcon>
           <ListItemText primary="Employees"></ListItemText>
+        </ListItemButton>
+      </StyledLink>
+    </ListItem>
+    <ListItem>
+      <StyledLink to="/sample">
+        <ListItemButton>
+          <ListItemIcon>
+            <SchoolIcon />
+          </ListItemIcon>
+          <ListItemText primary="Sample"></ListItemText>
         </ListItemButton>
       </StyledLink>
     </ListItem>

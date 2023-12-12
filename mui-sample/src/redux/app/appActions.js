@@ -2,6 +2,7 @@ export const TOGGLE_MOBILE_DRAWER = "TOGGLE_MOBILE_DRAWER";
 export const SET_ERROR = "SET_ERROR";
 export const SET_SUCCESS = "SET_SUCCESS";
 export const SET_IS_LOADING = "SET_IS_LOADING";
+export const SET_THEME = "SET_THEME";
 
 export const toggleMobileDrawer = (open) => {
   return {
@@ -28,5 +29,12 @@ export const setIsLoading = (show) => {
   return {
     type: SET_IS_LOADING,
     payload: show,
+  };
+};
+
+export const setTheme = (theme) => {
+  return {
+    type: SET_THEME,
+    payload: theme,
   };
 };

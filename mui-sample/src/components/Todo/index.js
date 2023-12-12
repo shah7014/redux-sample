@@ -19,7 +19,7 @@ import {
 } from "../../redux/todo/todoActions";
 import { PageHeader } from "../global/common";
 
-const Todos = () => {
+const Todo = () => {
   const [newTodo, setNewTodo] = useState("");
 
   const { todos } = useSelector((state) => state.todo);
@@ -155,4 +155,4 @@ const Todos = () => {
   );
 };
 
-export default Todos;
+export default Todo;

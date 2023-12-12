@@ -21,7 +21,7 @@ const Notification = () => {
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={isLoading}
       >
-        <CircularProgress color="inherit" size={"200px"} />
+        <CircularProgress color="inherit" size={"100px"} />
       </Backdrop>
 
       {/* success toast */}

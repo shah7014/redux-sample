@@ -1,16 +1,37 @@
-import { Box, CssBaseline, Divider, Drawer, Toolbar } from "@mui/material";
+import {
+  Box,
+  CssBaseline,
+  Divider,
+  Drawer,
+  ThemeProvider,
+  Toolbar,
+  createTheme,
+} from "@mui/material";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import Todos from "./components/Todo";
+import Todo from "./components/Todo";
 import { MenuItemList } from "./components/global/MenuItemList";
 import Notification from "./components/global/Notification";
+import Sample from "./components/Sample";
+import { useSelector } from "react-redux";
 
 const App = () => {
   const drawerWidth = 240;
 
+  const { theme: currentTheme } = useSelector((state) => state.app);
+
+  const theme = createTheme({
+    palette: {
+      background: {
+        default: currentTheme === "light" ? "#f5f5f5" : "#121212",
+      },
+      mode: currentTheme,
+    },
+  });
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <Notification />
       <NavBar />
@@ -39,15 +60,17 @@ const App = () => {
             width: { xs: "100%", sm: `calc(100% - ${drawerWidth}px)` },
             padding: "8px",
             height: "100%",
-            backgroundColor: (theme) => theme.palette.grey[100],
+            // backgroundColor: (theme) => theme.palette.grey[100],
           }}
         >
           <Routes>
-            <Route path="/" element={<Todos />} />
+            <Route path="/" element={<Todo />} />
+            <Route path="/todos" element={<Todo />} />
+            <Route path="/sample" element={<Sample />} />
           </Routes>
         </Box>
       </Box>
-    </>
+    </ThemeProvider>
   );
 };
 
