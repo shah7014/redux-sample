@@ -8,13 +8,13 @@ import {
   createTheme,
 } from "@mui/material";
 import React from "react";
+import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Todo from "./components/Todo";
 import { MenuItemList } from "./components/global/MenuItemList";
 import Notification from "./components/global/Notification";
-import Sample from "./components/Sample";
-import { useSelector } from "react-redux";
+import Employees from "./components/Employees";
 
 const App = () => {
   const drawerWidth = 240;
@@ -66,7 +66,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Todo />} />
             <Route path="/todos" element={<Todo />} />
-            <Route path="/sample" element={<Sample />} />
+            <Route path="/employee" element={<Employees />} />
           </Routes>
         </Box>
       </Box>
