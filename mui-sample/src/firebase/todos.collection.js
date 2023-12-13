@@ -1,15 +1,7 @@
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
-  updateDoc,
-  writeBatch,
-} from "firebase/firestore";
 import axios from "axios";
+import { collection, doc, writeBatch } from "firebase/firestore";
 import firestore from "./config";
+import { dbOperations } from "./helpers";
 
 const todosCollection = collection(firestore, "todos");
 
@@ -36,52 +28,24 @@ const initWithRandomData = async () => {
   }
 };
 
-const create = async (todo) => {
-  try {
-    return addDoc(todosCollection, todo);
-  } catch (error) {
-    throw error;
-  }
+const create = (todo) => {
+  return dbOperations.create(todosCollection, todo);
 };
 
-const getAll = async () => {
-  try {
-    const querySnapshot = await getDocs(todosCollection);
-    return querySnapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
-  } catch (error) {
-    throw error;
-  }
+const getAll = () => {
+  return dbOperations.getAll(todosCollection);
 };
 
-const get = async (id) => {
-  try {
-    const docRef = doc(todosCollection, id);
-    const docSnap = await getDoc(docRef);
-    if (!docSnap.exists()) {
-      throw new Error("Todo not found");
-    }
-    return { id: docSnap.id, ...docSnap.data() };
-  } catch (error) {
-    throw error;
-  }
+const get = (id) => {
+  return dbOperations.get(id, "Todo not found");
 };
 
-const update = async (id, data) => {
-  try {
-    const docRef = doc(todosCollection, id);
-    await updateDoc(docRef, data);
-  } catch (error) {
-    throw error;
-  }
+const update = (id, data) => {
+  return dbOperations.update(todosCollection, id, data);
 };
 
-const remove = async (id) => {
-  try {
-    const docRef = doc(todosCollection, id);
-    await deleteDoc(docRef);
-  } catch (error) {
-    throw error;
-  }
+const remove = (id) => {
+  return dbOperations.remove(todosCollection, id);
 };
 
 export const todos = {
