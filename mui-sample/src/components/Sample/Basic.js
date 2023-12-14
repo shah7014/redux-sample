@@ -64,7 +64,7 @@ const StyledInput = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Sample = () => {
+const Basic = () => {
   const [page, setPage] = useState(0);
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -199,4 +199,4 @@ const Sample = () => {
   );
 };
 
-export default Sample;
+export default Basic;

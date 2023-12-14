@@ -1,7 +1,10 @@
 import {
   collection,
+  endBefore,
+  getCountFromServer,
   getDocs,
   limit,
+  limitToLast,
   orderBy,
   query,
   startAfter,
@@ -72,6 +75,60 @@ const getPaginatedAndSortedEmployees = async (
   }
 };
 
+const getNextPaginatedData = async (
+  cursor,
+  itemsPerPage,
+  sortOrder,
+  sortByProperty
+) => {
+  try {
+    const constraints = [
+      orderBy(sortByProperty, sortOrder),
+      limit(itemsPerPage),
+    ];
+    if (cursor) {
+      constraints.push(startAfter(cursor));
+    }
+
+    const paginatedQuery = query(employeesCollection, ...constraints);
+
+    return getDocs(paginatedQuery);
+  } catch (error) {
+    throw error;
+  }
+};
+const getPrevPaginatedData = async (
+  cursor,
+  itemsPerPage,
+  sortOrder,
+  sortByProperty
+) => {
+  try {
+    const constraints = [
+      orderBy(sortByProperty, sortOrder),
+      limitToLast(itemsPerPage),
+    ];
+    if (cursor) {
+      constraints.push(endBefore(cursor));
+    }
+
+    const paginatedQuery = query(employeesCollection, ...constraints);
+
+    return getDocs(paginatedQuery);
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getCountOfEmployees = async () => {
+  try {
+    const snapshot = await getCountFromServer(query(employeesCollection));
+    return snapshot.data().count;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const employees = {
   get,
   getAll,
@@ -79,6 +136,9 @@ const employees = {
   update,
   remove,
   getPaginatedAndSortedEmployees,
+  getNextPaginatedData,
+  getPrevPaginatedData,
+  getCountOfEmployees,
 };
 
 export default employees;

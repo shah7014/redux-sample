@@ -10,12 +10,12 @@ import {
 import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import Employees from "./components/Employees";
 import NavBar from "./components/NavBar";
+import SamplePaginatedTable from "./components/Sample/SamplePaginatedTable";
 import Todo from "./components/Todo";
 import { MenuItemList } from "./components/global/MenuItemList";
 import Notification from "./components/global/Notification";
-import Employees from "./components/Employees";
-import Sample from "./components/Sample";
 
 const App = () => {
   const drawerWidth = 240;
@@ -68,7 +68,7 @@ const App = () => {
             <Route path="/" element={<Todo />} />
             <Route path="/todos" element={<Todo />} />
             <Route path="/employees" element={<Employees />} />
-            <Route path="/sample" element={<Sample />} />
+            <Route path="/sample" element={<SamplePaginatedTable />} />
           </Routes>
         </Box>
       </Box>
