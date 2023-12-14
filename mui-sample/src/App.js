@@ -15,6 +15,7 @@ import Todo from "./components/Todo";
 import { MenuItemList } from "./components/global/MenuItemList";
 import Notification from "./components/global/Notification";
 import Employees from "./components/Employees";
+import Sample from "./components/Sample";
 
 const App = () => {
   const drawerWidth = 240;
@@ -66,7 +67,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Todo />} />
             <Route path="/todos" element={<Todo />} />
-            <Route path="/employee" element={<Employees />} />
+            <Route path="/employees" element={<Employees />} />
+            <Route path="/sample" element={<Sample />} />
           </Routes>
         </Box>
       </Box>

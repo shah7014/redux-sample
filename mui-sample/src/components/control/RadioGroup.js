@@ -31,6 +31,7 @@ const RadioGroup = ({
           <MuiRadioGroup {...rest} ref={ref} row={row}>
             {radioOptions.map(({ label, value }) => (
               <FormControlLabel
+                key={value}
                 label={label}
                 value={value}
                 control={<MuiRadio />}

@@ -28,7 +28,9 @@ const Select = ({
           <FormLabel>{label}</FormLabel>
           <MuiSelect {...rest} ref={ref}>
             {options.map(({ label, value }) => (
-              <MenuItem value={value}>{label}</MenuItem>
+              <MenuItem key={value} value={value}>
+                {label}
+              </MenuItem>
             ))}
           </MuiSelect>
           <FormHelperText>{error?.message}</FormHelperText>

@@ -1,11 +1,18 @@
 import { DevTool } from "@hookform/devtools";
 import { Button, Paper, Stack } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Controls } from "../control";
+import { useDispatch } from "react-redux";
+import { createEmployee } from "../../redux/employee/employeesAction";
 
 const NewEmployeeForm = () => {
-  const { handleSubmit, control } = useForm({
+  const {
+    handleSubmit,
+    control,
+    formState: { isSubmitSuccessful },
+    reset,
+  } = useForm({
     defaultValues: {
       fullName: "",
       email: "",
@@ -17,8 +24,17 @@ const NewEmployeeForm = () => {
     },
   });
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [reset, isSubmitSuccessful]);
+
   const submitSuccessHandler = (data) => {
     console.log(data);
+    dispatch(createEmployee(data));
   };
 
   const submitErrorHandler = (errors) => {
